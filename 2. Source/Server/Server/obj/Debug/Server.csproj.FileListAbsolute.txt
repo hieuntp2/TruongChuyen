@@ -1,0 +1,16 @@
+C:\Users\le hieu\Desktop\Server\Server\obj\Debug\Server.exe
+C:\Users\le hieu\Desktop\Server\Server\obj\Debug\Server.pdb
+C:\Users\le hieu\Desktop\Source\Server\Server\obj\Debug\Server.exe
+C:\Users\le hieu\Desktop\Source\Server\Server\obj\Debug\Server.pdb
+C:\Users\mrcazemoke\Downloads\NCKH - HS\NCKH - HS\2. Source\Server\Server\obj\Debug\Server.exe
+C:\Users\mrcazemoke\Downloads\NCKH - HS\NCKH - HS\2. Source\Server\Server\obj\Debug\Server.pdb
+C:\Users\mrcazemoke\Downloads\NCKH - HS\NCKH - HS\2. Source\Server\Server\bin\Debug\Server.exe
+C:\Users\mrcazemoke\Downloads\NCKH - HS\NCKH - HS\2. Source\Server\Server\bin\Debug\Server.pdb
+C:\Users\mrcazemoke\Downloads\NCKH - HS\NCKH - HS\2. Source\Server\Server\obj\Debug\Server.SGSserverForm.resources
+C:\Users\mrcazemoke\Downloads\NCKH - HS\NCKH - HS\2. Source\Server\Server\obj\Debug\Server.Properties.Resources.resources
+C:\Users\mrcazemoke\Downloads\NCKH - HS\NCKH - HS\2. Source\Server\Server\obj\Debug\Server.csproj.GenerateResource.Cache
+C:\Users\mrcazemoke\Downloads\NCKH - HS\NCKH - HS\2. Source\Server\Server\obj\Debug\Server.AccessForm.resources
+C:\Users\mrcazemoke\Downloads\NCKH - HS\NCKH - HS\2. Source\Server\Server\obj\Debug\Server.PlayGameForm.resources
+C:\Users\mrcazemoke\Downloads\NCKH - HS\NCKH - HS\2. Source\Server\Server\obj\Debug\Server.CreateTestForm.resources
+C:\Users\mrcazemoke\Downloads\NCKH - HS\NCKH - HS\2. Source\Server\Server\obj\Debug\Server.HelpForm.resources
+C:\Users\mrcazemoke\Downloads\NCKH - HS\NCKH - HS\2. Source\Server\Server\obj\Debug\Server.csprojResolveAssemblyReference.cache

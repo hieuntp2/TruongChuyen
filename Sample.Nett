@@ -1,0 +1,34 @@
+<QuestionList>
+	<Question>
+		<ID>1</ID>
+		<Quest>2+2=</Quest>
+		<QuestType>1</QuestType>
+		<AnswerA>A. 1</AnswerA>
+		<AnswerB>B. 2</AnswerB>
+		<AnswerC>C. 3</AnswerC>
+		<AnswerD>D. 4</AnswerD>
+		<RightAnswer>A. 1</RightAnswer>
+		<Time>10</Time>
+	</Question>
+	<Question>
+		<ID>2</ID>
+		<Quest>4+4=</Quest>
+		<QuestType>1</QuestType>
+		<AnswerA>A. 1</AnswerA>
+		<AnswerB>B. 2</AnswerB>
+		<AnswerC>C. 3</AnswerC>
+		<AnswerD>D. 4</AnswerD>
+		<RightAnswer>A. 1</RightAnswer>
+		<Time>10</Time>
+	</Question>
+	<Question>
+		<ID>3</ID>
+		<Quest>2+4=</Quest>
+		<QuestType>1</QuestType>
+		<AnswerA>A. 1</AnswerA>
+		<AnswerB>B. 2</AnswerB>
+		<AnswerC>C. 3</AnswerC>
+		<AnswerD>D. 4</AnswerD>
+		<RightAnswer>A. 1</RightAnswer>
+		<Time>10</Time>
+	</Question></QuestionList>

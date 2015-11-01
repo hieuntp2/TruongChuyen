@@ -1,0 +1,36 @@
+C:\Users\User\Desktop\Olympia\2. Source\Client\SGSclient\bin\Release\SGSclient.exe
+C:\Users\User\Desktop\Olympia\2. Source\Client\SGSclient\bin\Release\SGSclient.pdb
+C:\Users\User\Desktop\Olympia\2. Source\Client\SGSclient\obj\Release\Client.csprojResolveAssemblyReference.cache
+C:\Users\User\Desktop\Olympia\2. Source\Client\SGSclient\obj\Release\SGSclient.SGSClient.resources
+C:\Users\User\Desktop\Olympia\2. Source\Client\SGSclient\obj\Release\SGSclient.LoginForm.resources
+C:\Users\User\Desktop\Olympia\2. Source\Client\SGSclient\obj\Release\SGSclient.Properties.Resources.resources
+C:\Users\User\Desktop\Olympia\2. Source\Client\SGSclient\obj\Release\Client.csproj.GenerateResource.Cache
+C:\Users\User\Desktop\Olympia\2. Source\Client\SGSclient\obj\Release\SGSclient.exe
+C:\Users\User\Desktop\Olympia\2. Source\Client\SGSclient\obj\Release\SGSclient.pdb
+C:\Users\User\Desktop\NCKH - HS\2. Source\Client\SGSclient\obj\Release\SGSclient.exe
+C:\Users\User\Desktop\NCKH - HS\2. Source\Client\SGSclient\obj\Release\SGSclient.pdb
+C:\Users\User\Desktop\NCKH - HS\2. Source\Client\SGSclient\bin\Release\SGSclient.exe
+C:\Users\User\Desktop\NCKH - HS\2. Source\Client\SGSclient\bin\Release\SGSclient.pdb
+C:\Users\User\Desktop\NCKH - HS\2. Source\Client\SGSclient\obj\Release\Client.csprojResolveAssemblyReference.cache
+C:\Users\User\Desktop\NCKH - HS\2. Source\Client\SGSclient\obj\Release\SGSclient.SGSClient.resources
+C:\Users\User\Desktop\NCKH - HS\2. Source\Client\SGSclient\obj\Release\SGSclient.LoginForm.resources
+C:\Users\User\Desktop\NCKH - HS\2. Source\Client\SGSclient\obj\Release\SGSclient.Properties.Resources.resources
+C:\Users\User\Desktop\NCKH - HS\2. Source\Client\SGSclient\obj\Release\Client.csproj.GenerateResource.Cache
+E:\Lam\NCKH - HS2\NCKH - HS\NCKH - HS\2. Source\Client\SGSclient\obj\Release\SGSclient.exe
+E:\Lam\NCKH - HS2\NCKH - HS\NCKH - HS\2. Source\Client\SGSclient\obj\Release\SGSclient.pdb
+E:\Lam\NCKH - HS2\NCKH - HS\NCKH - HS\2. Source\Client\SGSclient\bin\Release\SGSclient.exe
+E:\Lam\NCKH - HS2\NCKH - HS\NCKH - HS\2. Source\Client\SGSclient\bin\Release\SGSclient.pdb
+E:\Lam\NCKH - HS2\NCKH - HS\NCKH - HS\2. Source\Client\SGSclient\obj\Release\Client.csprojResolveAssemblyReference.cache
+E:\Lam\NCKH - HS2\NCKH - HS\NCKH - HS\2. Source\Client\SGSclient\obj\Release\SGSclient.SGSClient.resources
+E:\Lam\NCKH - HS2\NCKH - HS\NCKH - HS\2. Source\Client\SGSclient\obj\Release\SGSclient.LoginForm.resources
+E:\Lam\NCKH - HS2\NCKH - HS\NCKH - HS\2. Source\Client\SGSclient\obj\Release\SGSclient.Properties.Resources.resources
+E:\Lam\NCKH - HS2\NCKH - HS\NCKH - HS\2. Source\Client\SGSclient\obj\Release\Client.csproj.GenerateResource.Cache
+F:\5. Project\9. truongchuyen\NCKH - HS\2. Source\Client\SGSclient\obj\Release\SGSclient.exe
+F:\5. Project\9. truongchuyen\NCKH - HS\2. Source\Client\SGSclient\obj\Release\SGSclient.pdb
+F:\5. Project\9. truongchuyen\NCKH - HS\2. Source\Client\SGSclient\bin\Release\SGSclient.exe
+F:\5. Project\9. truongchuyen\NCKH - HS\2. Source\Client\SGSclient\bin\Release\SGSclient.pdb
+F:\5. Project\9. truongchuyen\NCKH - HS\2. Source\Client\SGSclient\obj\Release\Client.csprojResolveAssemblyReference.cache
+F:\5. Project\9. truongchuyen\NCKH - HS\2. Source\Client\SGSclient\obj\Release\SGSclient.SGSClient.resources
+F:\5. Project\9. truongchuyen\NCKH - HS\2. Source\Client\SGSclient\obj\Release\SGSclient.LoginForm.resources
+F:\5. Project\9. truongchuyen\NCKH - HS\2. Source\Client\SGSclient\obj\Release\SGSclient.Properties.Resources.resources
+F:\5. Project\9. truongchuyen\NCKH - HS\2. Source\Client\SGSclient\obj\Release\Client.csproj.GenerateResource.Cache
