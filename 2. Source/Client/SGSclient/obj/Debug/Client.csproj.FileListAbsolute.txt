@@ -1,9 +1,0 @@
-C:\Users\mrcazemoke\Downloads\NCKH - HS\NCKH - HS\2. Source\Client\SGSclient\bin\Debug\SGSclient.exe
-C:\Users\mrcazemoke\Downloads\NCKH - HS\NCKH - HS\2. Source\Client\SGSclient\bin\Debug\SGSclient.pdb
-C:\Users\mrcazemoke\Downloads\NCKH - HS\NCKH - HS\2. Source\Client\SGSclient\obj\Debug\Client.csprojResolveAssemblyReference.cache
-C:\Users\mrcazemoke\Downloads\NCKH - HS\NCKH - HS\2. Source\Client\SGSclient\obj\Debug\SGSclient.SGSClient.resources
-C:\Users\mrcazemoke\Downloads\NCKH - HS\NCKH - HS\2. Source\Client\SGSclient\obj\Debug\SGSclient.LoginForm.resources
-C:\Users\mrcazemoke\Downloads\NCKH - HS\NCKH - HS\2. Source\Client\SGSclient\obj\Debug\SGSclient.Properties.Resources.resources
-C:\Users\mrcazemoke\Downloads\NCKH - HS\NCKH - HS\2. Source\Client\SGSclient\obj\Debug\Client.csproj.GenerateResource.Cache
-C:\Users\mrcazemoke\Downloads\NCKH - HS\NCKH - HS\2. Source\Client\SGSclient\obj\Debug\SGSclient.exe
-C:\Users\mrcazemoke\Downloads\NCKH - HS\NCKH - HS\2. Source\Client\SGSclient\obj\Debug\SGSclient.pdb
