@@ -120,5 +120,10 @@ namespace NCKH3.Class
             manage.RemoveClient(this);
         }
 
+
+        internal void sendTransaction(MyBaseTransaction transaction)
+        {
+            _mysendFactory.sendJsonObject(transaction);
+        }
     }
 }

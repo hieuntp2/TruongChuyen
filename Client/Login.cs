@@ -1,9 +1,7 @@
 ﻿using MyTransactionCode;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Net.Sockets;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace Client
@@ -66,6 +64,9 @@ namespace Client
                     Client client = new Client();
                     this.Hide();
                     client.Show();                    
+                    break;
+                case Transaction_Code.sv_disconnect:
+                    MessageBox.Show("Server has been close or not found!");
                     break;
             }
         }

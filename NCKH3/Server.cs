@@ -2,7 +2,6 @@
 using NCKH3.Class;
 using System;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -60,17 +59,25 @@ namespace NCKH3
         }
 
         private void Server_FormClosed(object sender, FormClosedEventArgs e)
-        {           
-            Console.WriteLine(" >> exit");
-            Console.ReadLine();
-            _myListenAccept.stop();
-            serverSocket.Stop();
-            _threadmanage.StopManage();
+        {
+            Stop();
         }
 
         internal string getPassword()
         {
             return tbPassword.Text;
+        }
+
+        private void Stop()
+        {
+            // Send a message to all client that server has been stopped
+            MyBaseTransaction tr_disconect = new MyBaseTransaction();
+            tr_disconect._myTransactioncode = Transaction_Code.sv_disconnect;
+            _myClientManage.sendToAll(tr_disconect);
+
+            _myListenAccept.stop();
+            serverSocket.Stop();
+            _threadmanage.StopManage();
         }
     }
 

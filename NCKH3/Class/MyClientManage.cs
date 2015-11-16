@@ -1,9 +1,6 @@
-﻿using System;
+﻿using MyTransactionCode;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NCKH3.Class
 {
@@ -74,6 +71,14 @@ namespace NCKH3.Class
         {
             _lClients.RemoveAt(p);
         }
-    
+
+
+        internal void sendToAll(MyBaseTransaction transaction)
+        {
+            for(int i = 0; i < _lClients.Count; i++)
+            {
+                _lClients[i].sendTransaction(transaction);
+            }
+        }
     }
 }
