@@ -67,7 +67,7 @@ namespace NCKH3
             else
             {
                 question.Answer = tbAnswer.Text;
-            }          
+            }
 
             if (rbdNotExactlyChoice.Checked)
             {
@@ -186,7 +186,7 @@ namespace NCKH3
             question.choiceD = tbChoiceD.Text;
 
             // nếu câu hỏi là câu hỏi điền khuyết
-            if(rbMissingField.Checked)
+            if (rbMissingField.Checked)
             {
                 question.Answer = tbClientAnswer.Text;
             }
@@ -194,7 +194,7 @@ namespace NCKH3
             {
                 question.Answer = tbAnswer.Text;
             }
-            
+
 
             if (rbdNotExactlyChoice.Checked)
             {
@@ -359,9 +359,14 @@ namespace NCKH3
         private void openFromFile_Click(object sender, EventArgs e)
         {
             clearValue();
+            String Location = String.Empty;
             try
             {
-                if(_groupquestion != null)
+
+#if DEBUG
+                Location = "D:/Bộ câu hỏi 1.json";
+#else
+                if (_groupquestion != null)
                 {
                     DialogResult dialogResult = MessageBox.Show("Bạn có muốn lưu bạn hiện tại không?", "Lưu", MessageBoxButtons.YesNoCancel);
                     if (dialogResult == DialogResult.Yes)
@@ -369,14 +374,13 @@ namespace NCKH3
                         _groupquestion.SaveToFile(tbQuestionGroupName.Text, tbAddress.Text);
                     }
 
-                    if(dialogResult == DialogResult.Cancel)
+                    if (dialogResult == DialogResult.Cancel)
                     {
                         return;
                     }
                 }
 
-                String Location = String.Empty;
-                OpenFileDialog frm = new OpenFileDialog();
+                  OpenFileDialog frm = new OpenFileDialog();
                 frm.InitializeLifetimeService();
                 frm.Filter = "Bộ đề (*.json)|*.json";
                 frm.Title = "Browse Config file";
@@ -385,13 +389,14 @@ namespace NCKH3
 
                 if (ret == DialogResult.OK)
                     Location = frm.FileName;
+#endif
                 if (Location != "")
                 {
                     _groupquestion.LoadFromFile(Location);
                     updateListQuestions();
                     tbAddress.Text = _groupquestion.Address;
                     tbQuestionGroupName.Text = _groupquestion.Name;
-                }                 
+                }
             }
             catch (Exception ex)
             {
@@ -436,7 +441,7 @@ namespace NCKH3
 
         private void saveFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _groupquestion.SaveToFile(tbQuestionGroupName.Text, tbAddress.Text);            
+            _groupquestion.SaveToFile(tbQuestionGroupName.Text, tbAddress.Text);
         }
 
         private void thoátToolStripMenuItem_Click(object sender, EventArgs e)
@@ -471,6 +476,9 @@ namespace NCKH3
         private void lưuNhưToolStripMenuItem_Click(object sender, EventArgs e)
         {
             String Location = String.Empty;
+#if DEBUG
+            Location = "D:/Bộ câu hỏi 1.json";
+#else
             SaveFileDialog frm = new SaveFileDialog();
             frm.InitializeLifetimeService();
             frm.Filter = "Bộ đề (*.json)|*.json";
@@ -480,13 +488,13 @@ namespace NCKH3
 
             if (ret == DialogResult.OK)
             {
-                Location = frm.FileName;
-                tbAddress.Text = Location;
-
-                if (Location != "")
-                {
-                    _groupquestion.SaveToFile(tbQuestionGroupName.Text, tbAddress.Text);
-                }
+                Location = frm.FileName;                
+            }
+#endif
+            tbAddress.Text = Location;
+            if (Location != "")
+            {
+                _groupquestion.SaveToFile(tbQuestionGroupName.Text, tbAddress.Text);
             }
         }
 

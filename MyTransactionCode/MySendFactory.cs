@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Net.Sockets;
+using System.Text;
 
 namespace MyTransactionCode
 {
@@ -23,7 +24,7 @@ namespace MyTransactionCode
             {
                 string json = JsonConvert.SerializeObject(obj);
                 NetworkStream serverStream = clientSocket.GetStream();
-                byte[] outStream = System.Text.Encoding.ASCII.GetBytes(json);
+                byte[] outStream = Encoding.Unicode.GetBytes(json);
                 serverStream.Write(outStream, 0, outStream.Length);
                 serverStream.Flush();
             }

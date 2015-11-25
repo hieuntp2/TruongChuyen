@@ -397,9 +397,25 @@ namespace NCKH3
 
         private void saveResultToFile_Click(object sender, EventArgs e)
         {
-            if(_groupquestion != null)
+            string pathFile = "";
+#if DEBUG
+            pathFile = "D:/test_result.txt";
+#else
+            String Location = String.Empty;
+            SaveFileDialog frm = new SaveFileDialog();
+            frm.InitializeLifetimeService();
+            frm.Filter = "Bộ đề (*.json)|*.json";
+            frm.Title = "Browse Config file";
+            DialogResult ret = STAShowDialog(frm);
+
+
+            if (ret == DialogResult.OK)
             {
-                string pathFile = "D:/test_result.txt";
+                pathFile = frm.FileName;                
+            }
+#endif
+            if (_groupquestion != null)
+            {                
                 System.IO.StreamWriter file = new System.IO.StreamWriter(pathFile, true);
                 file.WriteLine("Bộ câu hỏi: " + _groupquestion.name + " số lượng: " + _groupquestion.questions.Count);
                 file.WriteLine("Ngày kiểm tra: " + DateTime.Now);

@@ -69,20 +69,21 @@ namespace NCKH3.Class
         {
             while (isRunning)
             {
-                try
-                {
-                    NetworkStream networkStream = _socket.GetStream();
-                    byte[] bytesFrom = new byte[10025];
-                    networkStream.Read(bytesFrom, 0, (int)_socket.ReceiveBufferSize);
-                    string dataFromClient = System.Text.Encoding.ASCII.GetString(bytesFrom);
-                    processRequest(dataFromClient);
-                }
-                catch (Exception ex)
-                {
-                    Stop();
-                    _currentForm.addToReceiverText(">> Client " + id + " đã ngắt kết nối");
-                    MyLogSystem.Log(ex.ToString());
-                }
+                //try
+                //{
+                NetworkStream networkStream = _socket.GetStream();
+                byte[] bytesFrom = new byte[10025];
+                networkStream.Read(bytesFrom, 0, (int)_socket.ReceiveBufferSize);
+                string dataFromClient = MyDecodeUnicode.DecodeFromUtf8(Encoding.Unicode.GetString(bytesFrom));
+
+                processRequest(dataFromClient);
+                //}
+                //catch (Exception ex)
+                //{
+                //    Stop();
+                //    _currentForm.addToReceiverText(">> Client " + id + " đã ngắt kết nối");
+                //    MyLogSystem.Log(ex.ToString());
+                //}
             }
         }
 
@@ -174,7 +175,7 @@ namespace NCKH3.Class
             // Kết quả client
             for (int i = 0; i < ListQuestionAnswereds.Count; i++)
             {
-                file.Write("Câu hỏi số: " + i + ". Đáp án: " +  ListQuestionAnswereds[i] + ", đáp án: " + groupQuestion.questions[i].Answer + ": ");
+                file.Write("Câu hỏi số: " + i + ". Đáp án: " + ListQuestionAnswereds[i] + ", đáp án: " + groupQuestion.questions[i].Answer + ": ");
 
                 string myClientAnswer = ListQuestionAnswereds[i];
                 string myQuestionAnswer = groupQuestion.questions[i].Answer;

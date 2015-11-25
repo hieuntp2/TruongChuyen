@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Net.Sockets;
+using System.Text;
 using System.Windows.Forms;
 
 namespace Client
@@ -38,7 +39,7 @@ namespace Client
                 NetworkStream networkStream = clientSocket.GetStream();
                 byte[] bytesFrom = new byte[10025];
                 networkStream.Read(bytesFrom, 0, (int)clientSocket.ReceiveBufferSize);
-                string dataFromClient = System.Text.Encoding.ASCII.GetString(bytesFrom);
+                string dataFromClient = MyDecodeUnicode.DecodeFromUtf8(Encoding.Unicode.GetString(bytesFrom));
 
                 processRequest(dataFromClient);
             }

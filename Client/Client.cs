@@ -4,6 +4,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Drawing;
 using System.Net.Sockets;
+using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using System.Windows.Forms;
@@ -87,6 +88,7 @@ namespace Client
                         lbType.Text = "Điền khuyết";
                         gbFillMissingField.Visible = true;
                         gbOneChoice.Visible = false;
+                        tbClientAnswer.Focus();
                         break;
                     case MyQuestionType.MyOneChoiceQuestion:
                         lbType.Text = "Câu trả lời DUY NHẤT";
@@ -136,7 +138,7 @@ namespace Client
                     NetworkStream networkStream = clientSocket.GetStream();
                     byte[] bytesFrom = new byte[10025];
                     networkStream.Read(bytesFrom, 0, (int)clientSocket.ReceiveBufferSize);
-                    string dataFromClient = System.Text.Encoding.ASCII.GetString(bytesFrom);
+                    string dataFromClient = MyDecodeUnicode.DecodeFromUtf8(Encoding.Unicode.GetString(bytesFrom));
 
                     processRequest(dataFromClient);
                 }

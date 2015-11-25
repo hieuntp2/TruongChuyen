@@ -45,6 +45,7 @@
     <Compile Include="DialogResult.cs" />
     <Compile Include="DialogState.cs" />
     <Compile Include="MyBaseTransaction.cs" />
+    <Compile Include="MyDecodeUnicode.cs" />
     <Compile Include="MyLogSystem.cs" />
     <Compile Include="MyQuestion\MyBaseQuestion.cs" />
     <Compile Include="MySendFactory.cs" />
