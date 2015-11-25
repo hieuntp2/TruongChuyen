@@ -19,15 +19,15 @@ namespace NCKH3
 
         private void CreateQuestion_Load(object sender, EventArgs e)
         {
-            _groupquestion = new MyGroupQuestion();
-            _groupquestion.Address = "D:/";
+            _groupquestion = null;
+            //_groupquestion.Address = "D:/";
             tbAddress.Text = "D:/";
 
-            _groupquestion.Name = "Bộ câu hỏi 1";
+            //_groupquestion.Name = "Bộ câu hỏi 1";
             tbQuestionGroupName.Text = "Bộ câu hỏi 1";
 
             isNotSaved = false;
-            clearValue();
+            //clearValue();
         }
 
         private void btCreate_Click(object sender, EventArgs e)
@@ -60,14 +60,7 @@ namespace NCKH3
             question.choiceC = tbChoiceC.Text;
             question.choiceD = tbChoiceD.Text;
 
-            if (rbMissingField.Checked)
-            {
-                question.Answer = tbClientAnswer.Text;
-            }
-            else
-            {
-                question.Answer = tbAnswer.Text;
-            }
+            question.Answer = tbAnswer.Text;
 
             if (rbdNotExactlyChoice.Checked)
             {
@@ -102,7 +95,7 @@ namespace NCKH3
             {
                 // kiểm tra rỗng
                 if (string.IsNullOrWhiteSpace(tbQuestion.Text) ||
-                    string.IsNullOrWhiteSpace(tbClientAnswer.Text))
+                    string.IsNullOrWhiteSpace(tbAddress.Text))
                 {
                     MessageBox.Show("Có một số field đang để trống!");
                     return false;
@@ -186,15 +179,8 @@ namespace NCKH3
             question.choiceD = tbChoiceD.Text;
 
             // nếu câu hỏi là câu hỏi điền khuyết
-            if (rbMissingField.Checked)
-            {
-                question.Answer = tbClientAnswer.Text;
-            }
-            else
-            {
-                question.Answer = tbAnswer.Text;
-            }
 
+            question.Answer = tbAnswer.Text;
 
             if (rbdNotExactlyChoice.Checked)
             {
@@ -353,16 +339,14 @@ namespace NCKH3
             rbdNotExactlyChoice.Checked = true;
             rdExactlyChoise.Checked = false;
             _current_question_id = -1;
+            tbQuestion.Focus();
         }
 
 
         private void openFromFile_Click(object sender, EventArgs e)
         {
-            clearValue();
-            String Location = String.Empty;
             try
             {
-
 #if DEBUG
                 Location = "D:/Bộ câu hỏi 1.json";
 #else
@@ -380,7 +364,10 @@ namespace NCKH3
                     }
                 }
 
-                  OpenFileDialog frm = new OpenFileDialog();
+                clearValue();
+                String Location = String.Empty;
+
+                OpenFileDialog frm = new OpenFileDialog();
                 frm.InitializeLifetimeService();
                 frm.Filter = "Bộ đề (*.json)|*.json";
                 frm.Title = "Browse Config file";
@@ -394,8 +381,11 @@ namespace NCKH3
                 {
                     _groupquestion.LoadFromFile(Location);
                     updateListQuestions();
-                    tbAddress.Text = _groupquestion.Address;
+                    tbAddress.Text = Location;
+                    _groupquestion.Address = Location;
                     tbQuestionGroupName.Text = _groupquestion.Name;
+
+                    tbQuestion.Focus();
                 }
             }
             catch (Exception ex)
@@ -426,16 +416,25 @@ namespace NCKH3
                 return;
             }
 
-            DialogResult dialogResult = MessageBox.Show("Bạn chắc chắn muốn chỉnh sửa câu hỏi này? /n Mọi thông tin câu hỏi hiện tại sẽ bị thay đổi!", "Xóa", MessageBoxButtons.YesNo);
-            if (dialogResult == DialogResult.Yes)
+            if (_current_question_id != -1)
             {
-                MyBaseQuestion question = _groupquestion.getQuestion(Int32.Parse(lvListQuestion.SelectedItems[0].Text));
-
-                if (question != null)
+                DialogResult dialogResult = MessageBox.Show("Lưu câu hỏi hiện tại?", "Lưu", MessageBoxButtons.YesNoCancel);
+                if(dialogResult == DialogResult.Cancel)
                 {
-                    _current_question_id = question.Id;
-                    loadQuestionToForm(question);
+                    return;
                 }
+                if (dialogResult == DialogResult.Yes)
+                {
+                    updateQuestion();
+                }
+            }
+
+            clearFormTo();
+            MyBaseQuestion question = _groupquestion.getQuestion(Int32.Parse(lvListQuestion.SelectedItems[0].Text));
+            if (question != null)
+            {
+                _current_question_id = question.Id;
+                loadQuestionToForm(question);
             }
         }
 
@@ -488,7 +487,7 @@ namespace NCKH3
 
             if (ret == DialogResult.OK)
             {
-                Location = frm.FileName;                
+                Location = frm.FileName;
             }
 #endif
             tbAddress.Text = Location;
@@ -500,19 +499,16 @@ namespace NCKH3
 
         private void rbOneChoice_CheckedChanged(object sender, EventArgs e)
         {
-            gbFillMissingField.Hide();
             gbAnswer.Show();
         }
 
         private void rbMultiQuestion_CheckedChanged(object sender, EventArgs e)
         {
-            gbFillMissingField.Hide();
             gbAnswer.Show();
         }
 
         private void rbMissingField_CheckedChanged(object sender, EventArgs e)
         {
-            gbFillMissingField.Show();
             gbAnswer.Hide();
         }
     }

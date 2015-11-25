@@ -146,7 +146,7 @@ namespace MyTransactionCode.MyQuestion
             StringBuilder data = new StringBuilder();
             data.Append(JsonConvert.SerializeObject(this));
             
-            System.IO.StreamWriter file = new System.IO.StreamWriter(path + name + ".json");
+            System.IO.StreamWriter file = new System.IO.StreamWriter(path);
             file.WriteLine(data);
             file.Close();
         }

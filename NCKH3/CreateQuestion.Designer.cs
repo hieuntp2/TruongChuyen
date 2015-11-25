@@ -77,8 +77,6 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.btListQuestionEdit = new System.Windows.Forms.Button();
             this.btListQuestionDelete = new System.Windows.Forms.Button();
-            this.gbFillMissingField = new System.Windows.Forms.GroupBox();
-            this.tbClientAnswer = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.gbOneChoiceQuestion.SuspendLayout();
@@ -86,7 +84,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.tbTime)).BeginInit();
             this.gbAnswer.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.gbFillMissingField.SuspendLayout();
             this.SuspendLayout();
             // 
             // tbChoiceA
@@ -256,7 +253,6 @@
             // 
             // gbOneChoiceQuestion
             // 
-            this.gbOneChoiceQuestion.Controls.Add(this.gbFillMissingField);
             this.gbOneChoiceQuestion.Controls.Add(this.groupBox4);
             this.gbOneChoiceQuestion.Controls.Add(this.gbAnswer);
             this.gbOneChoiceQuestion.Controls.Add(this.groupBox2);
@@ -526,24 +522,6 @@
             this.btListQuestionDelete.UseVisualStyleBackColor = true;
             this.btListQuestionDelete.Click += new System.EventHandler(this.btListQuestionDelete_Click);
             // 
-            // gbFillMissingField
-            // 
-            this.gbFillMissingField.Controls.Add(this.tbClientAnswer);
-            this.gbFillMissingField.Location = new System.Drawing.Point(7, 182);
-            this.gbFillMissingField.Name = "gbFillMissingField";
-            this.gbFillMissingField.Size = new System.Drawing.Size(727, 125);
-            this.gbFillMissingField.TabIndex = 28;
-            this.gbFillMissingField.TabStop = false;
-            this.gbFillMissingField.Text = "Trả lời";
-            // 
-            // tbClientAnswer
-            // 
-            this.tbClientAnswer.Location = new System.Drawing.Point(7, 19);
-            this.tbClientAnswer.Multiline = true;
-            this.tbClientAnswer.Name = "tbClientAnswer";
-            this.tbClientAnswer.Size = new System.Drawing.Size(714, 96);
-            this.tbClientAnswer.TabIndex = 27;
-            // 
             // CreateQuestion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -577,8 +555,6 @@
             this.gbAnswer.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.gbFillMissingField.ResumeLayout(false);
-            this.gbFillMissingField.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -635,7 +611,5 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem lưuNhưToolStripMenuItem;
-        private System.Windows.Forms.GroupBox gbFillMissingField;
-        private System.Windows.Forms.TextBox tbClientAnswer;
     }
 }
