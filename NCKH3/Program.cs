@@ -13,7 +13,7 @@ namespace NCKH3
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new CreateQuestion());
+            Application.Run(new StartMenu());
         }
     }
 }

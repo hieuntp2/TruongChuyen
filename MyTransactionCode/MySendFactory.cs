@@ -1,10 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MyTransactionCode
 {
@@ -23,11 +19,14 @@ namespace MyTransactionCode
         /// <param name="obj"></param>
         public void sendJsonObject(Object obj)
         {
-            string json = JsonConvert.SerializeObject(obj);
-            NetworkStream serverStream = clientSocket.GetStream();
-            byte[] outStream = System.Text.Encoding.ASCII.GetBytes(json);
-            serverStream.Write(outStream, 0, outStream.Length);
-            serverStream.Flush();
+            if (clientSocket.Connected)
+            {
+                string json = JsonConvert.SerializeObject(obj);
+                NetworkStream serverStream = clientSocket.GetStream();
+                byte[] outStream = System.Text.Encoding.ASCII.GetBytes(json);
+                serverStream.Write(outStream, 0, outStream.Length);
+                serverStream.Flush();
+            }
         }
 
         /// <summary>
@@ -37,7 +36,7 @@ namespace MyTransactionCode
         public void quickSendJsonObject(Transaction_Code transactioncode)
         {
             MyBaseTransaction transaction = new MyBaseTransaction();
-            transaction._myTransactioncode = transactioncode;
+            transaction.MyTransactioncode = transactioncode;
 
             sendJsonObject(transaction);
         }

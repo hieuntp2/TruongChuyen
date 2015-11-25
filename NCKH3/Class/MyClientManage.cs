@@ -1,4 +1,5 @@
 ﻿using MyTransactionCode;
+using MyTransactionCode.MyQuestion;
 using System.Collections.Generic;
 using System.Net.Sockets;
 
@@ -43,10 +44,10 @@ namespace NCKH3.Class
 
         internal void addNewClient(TcpClient clientSocket)
         {
-            MyClient myclient = new MyClient(clientSocket);
-            myclient.setCurrentForm(_currentForm);
+            MyClient myclient = new MyClient(clientSocket, _currentForm);
+            //myclient.setCurrentForm(_currentForm);
             _lClients.Add(myclient);
-            _currentForm.addToReceiverText("Client " + myclient.getId().ToString() + "Connect to server!");
+            _currentForm.addToReceiverText(">> Usser " + myclient.getId() + " kết nối!");
         }
 
         /// <summary>
@@ -78,6 +79,46 @@ namespace NCKH3.Class
             for(int i = 0; i < _lClients.Count; i++)
             {
                 _lClients[i].sendTransaction(transaction);
+            }
+        }
+
+        internal void sendToAll(Transaction_Code code)
+        {
+            MyBaseTransaction transaction = new MyBaseTransaction();
+            transaction.MyTransactioncode = code;
+            for (int i = 0; i < _lClients.Count; i++)
+            {
+                _lClients[i].sendTransaction(transaction);
+            }
+        }
+
+        public void setMaxQuestion(int p)
+        {
+            foreach(MyClient client in _lClients)
+            {
+                client.setMaxGroupAnswer(p);
+            }
+        }
+
+        internal void showClientInfor(int clientId, MyGroupQuestion groupQuestion)
+        {
+            for(int i = 0; i < _lClients.Count; i++)
+            {
+                if(_lClients[i].getId() == clientId)
+                {
+                    ClientInfor form = new ClientInfor();
+                    form.updateInfor(_lClients[i], groupQuestion);
+                    form.Show();
+                    break;
+                }
+            }
+        }
+
+        internal void writeResultToFile(string pathFile, MyGroupQuestion groupQuestion)
+        {
+            for (int i = 0; i < _lClients.Count; i++)
+            {
+                _lClients[i].writeResultToFile(pathFile, groupQuestion);
             }
         }
     }

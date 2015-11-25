@@ -47,23 +47,57 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class\DialogState.cs" />
     <Compile Include="Class\MyClient.cs" />
     <Compile Include="Class\MyClientManage.cs" />
+    <Compile Include="Class\MyServerConfiguration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Class\MyServerConfiguration.Designer.cs">
+      <DependentUpon>MyServerConfiguration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Class\ServerTheadingManage.cs" />
+    <Compile Include="Class\SvListenAcceptClient.cs" />
+    <Compile Include="ClientInfor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClientInfor.Designer.cs">
+      <DependentUpon>ClientInfor.cs</DependentUpon>
+    </Compile>
     <Compile Include="CreateQuestion.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="CreateQuestion.Designer.cs">
       <DependentUpon>CreateQuestion.cs</DependentUpon>
     </Compile>
+    <Compile Include="QuestionResult.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuestionResult.Designer.cs">
+      <DependentUpon>QuestionResult.cs</DependentUpon>
+    </Compile>
     <Compile Include="Server.cs">
       <SubType>Form</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Server.Designer.cs">
       <DependentUpon>Server.cs</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StartMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StartMenu.Designer.cs">
+      <DependentUpon>StartMenu.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Class\MyServerConfiguration.resx">
+      <DependentUpon>MyServerConfiguration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClientInfor.resx">
+      <DependentUpon>ClientInfor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CreateQuestion.resx">
       <DependentUpon>CreateQuestion.cs</DependentUpon>
     </EmbeddedResource>
@@ -76,8 +110,15 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="QuestionResult.resx">
+      <DependentUpon>QuestionResult.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Server.resx">
       <DependentUpon>Server.cs</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StartMenu.resx">
+      <DependentUpon>StartMenu.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

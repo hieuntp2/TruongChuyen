@@ -1,13 +1,7 @@
-﻿using MyTransactionCode.MyQuestion;
-using Newtonsoft.Json.Linq;
+﻿using MyTransactionCode;
+using MyTransactionCode.MyQuestion;
+using NCKH3.Class;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace NCKH3
@@ -15,24 +9,12 @@ namespace NCKH3
     public partial class CreateQuestion : Form
     {
         private MyGroupQuestion _groupquestion;
+        private int _current_question_id = -1;
+        public bool isNotSaved { get; set; }
+
         public CreateQuestion()
         {
             InitializeComponent();
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label9_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void CreateQuestion_Load(object sender, EventArgs e)
@@ -44,6 +26,7 @@ namespace NCKH3
             _groupquestion.Name = "Bộ câu hỏi 1";
             tbQuestionGroupName.Text = "Bộ câu hỏi 1";
 
+            isNotSaved = false;
             clearValue();
         }
 
@@ -53,22 +36,91 @@ namespace NCKH3
             {
                 return;
             }
-            addNewQuestion();
-            clearValue();
+
+            if (_current_question_id == -1)
+            {
+                addNewQuestion();
+            }
+            else
+            {
+                updateQuestion();
+            }
+
+            clearFormTo();
+        }
+
+        private void updateQuestion()
+        {
+            MyBaseQuestion question = _groupquestion.getQuestion(_current_question_id);
+
+            question.Question = tbQuestion.Text;
+            question.Time = (int)tbTime.Value;
+            question.choiceA = tbChoiceA.Text;
+            question.choiceB = tbChoiceB.Text;
+            question.choiceC = tbChoiceC.Text;
+            question.choiceD = tbChoiceD.Text;
+
+            if (rbMissingField.Checked)
+            {
+                question.Answer = tbClientAnswer.Text;
+            }
+            else
+            {
+                question.Answer = tbAnswer.Text;
+            }          
+
+            if (rbdNotExactlyChoice.Checked)
+            {
+                question.isUpcase = true;
+            }
+            else
+            {
+                question.isUpcase = false;
+            }
+
+            if (rbOneChoice.Checked)
+            {
+                question.type = MyQuestionType.MyOneChoiceQuestion;
+            }
+            if (rbMultiQuestion.Checked)
+            {
+                question.type = MyQuestionType.MyMultiChoiceQuestion;
+            }
+            if (rbMissingField.Checked)
+            {
+                question.type = MyQuestionType.MyMissingFieldQuestion;
+            }
+
+            _groupquestion.updateQuestion(question);
         }
 
         private bool checkInput()
         {
             // kiểm tra rỗng
-            if (string.IsNullOrWhiteSpace(tbQuestion.Text) ||
-                string.IsNullOrWhiteSpace(tbChoiceA.Text) ||
-                string.IsNullOrWhiteSpace(tbChoiceB.Text) ||
-                string.IsNullOrWhiteSpace(tbChoiceC.Text) ||
-                string.IsNullOrWhiteSpace(tbChoiceD.Text) ||
-                string.IsNullOrWhiteSpace(tbAnswer.Text))
+            // Nếu là câu hỏi điền khuyết thì chỉ kiểm tra 1 câu trả lời
+            if (rbMissingField.Checked)
             {
-                MessageBox.Show("Có một số field đang để trống!");
-                return false;
+                // kiểm tra rỗng
+                if (string.IsNullOrWhiteSpace(tbQuestion.Text) ||
+                    string.IsNullOrWhiteSpace(tbClientAnswer.Text))
+                {
+                    MessageBox.Show("Có một số field đang để trống!");
+                    return false;
+                }
+            }
+            else
+            {
+                // kiểm tra rỗng
+                if (string.IsNullOrWhiteSpace(tbQuestion.Text) ||
+                    string.IsNullOrWhiteSpace(tbChoiceA.Text) ||
+                    string.IsNullOrWhiteSpace(tbChoiceB.Text) ||
+                    string.IsNullOrWhiteSpace(tbChoiceC.Text) ||
+                    string.IsNullOrWhiteSpace(tbChoiceD.Text) ||
+                    string.IsNullOrWhiteSpace(tbAnswer.Text))
+                {
+                    MessageBox.Show("Có một số field đang để trống!");
+                    return false;
+                }
             }
 
             // kiểm tra đáp án dựa vào loại
@@ -133,7 +185,16 @@ namespace NCKH3
             question.choiceC = tbChoiceC.Text;
             question.choiceD = tbChoiceD.Text;
 
-            question.Answer = tbAnswer.Text;
+            // nếu câu hỏi là câu hỏi điền khuyết
+            if(rbMissingField.Checked)
+            {
+                question.Answer = tbClientAnswer.Text;
+            }
+            else
+            {
+                question.Answer = tbAnswer.Text;
+            }
+            
 
             if (rbdNotExactlyChoice.Checked)
             {
@@ -157,8 +218,14 @@ namespace NCKH3
                 question.type = MyQuestionType.MyMissingFieldQuestion;
             }
 
+            _groupquestion.addQuestion(question);
+            addQuestionToLvQuestion(question);
+        }
+
+        private void addQuestionToLvQuestion(MyBaseQuestion question)
+        {
             // Update ListView Question
-            int idquestion = _groupquestion.addQuestion(question);
+            int idquestion = question.Id;
 
             ListViewItem item = new ListViewItem();
             item.Text = idquestion.ToString();
@@ -175,24 +242,9 @@ namespace NCKH3
             lvListQuestion.Items.Add(item);
         }
 
-        private void btSaveFileDialog_Click(object sender, EventArgs e)
-        {
-            //if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-            //{
-            //    System.IO.StreamReader sr = new
-            //       System.IO.StreamReader(saveFileDialog1.FileName);
-            //    MessageBox.Show(sr.ReadToEnd());
-
-            //    saveFileDialog1.FileName = _groupquestion.Name;
-            //    saveFileDialog1.DefaultExt = "json";
-
-            //    sr.Close();
-            //}
-        }
-
         private void btListQuestionDelete_Click(object sender, EventArgs e)
         {
-            if(lvListQuestion.SelectedItems.Count == 0)
+            if (lvListQuestion.SelectedItems.Count == 0)
             {
                 MessageBox.Show("Bạn chưa chọn câu hỏi nào!");
                 return;
@@ -203,7 +255,7 @@ namespace NCKH3
                 _groupquestion.removeQuestion(Int16.Parse(lvListQuestion.SelectedItems[0].Text));
                 lvListQuestion.Items.RemoveAt(lvListQuestion.SelectedItems[0].Index);
             }
-            
+
         }
 
         private void btListQuestionEdit_Click(object sender, EventArgs e)
@@ -219,8 +271,9 @@ namespace NCKH3
             {
                 MyBaseQuestion question = _groupquestion.getQuestion(Int32.Parse(lvListQuestion.SelectedItems[0].Text));
 
-                if(question != null)
+                if (question != null)
                 {
+                    _current_question_id = question.Id;
                     loadQuestionToForm(question);
                 }
             }
@@ -278,37 +331,181 @@ namespace NCKH3
 
             rbdNotExactlyChoice.Checked = true;
             rdExactlyChoise.Checked = false;
+            _current_question_id = -1;
+
+            _groupquestion = new MyGroupQuestion();
+            lvListQuestion.Items.Clear();
         }
 
-        private void saveFile_Click(object sender, EventArgs e)
+        public void clearFormTo()
         {
-            _groupquestion.SaveToFile();
+            tbQuestion.Text = "";
+            tbAnswer.Text = "";
+            tbChoiceA.Text = "";
+            tbChoiceB.Text = "";
+            tbChoiceC.Text = "";
+            tbChoiceD.Text = "";
+
+            tbTime.Value = 30;
+
+            rbOneChoice.Checked = true;
+
+            rbdNotExactlyChoice.Checked = true;
+            rdExactlyChoise.Checked = false;
+            _current_question_id = -1;
         }
+
 
         private void openFromFile_Click(object sender, EventArgs e)
         {
-            // Create an instance of the open file dialog box.
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-
-            // Set filter options and filter index.
-            openFileDialog1.Filter = "Text Files (.json)|*.json|All Files (*.*)|*.*";
-            openFileDialog1.FilterIndex = 1;
-
-            openFileDialog1.Multiselect = true;
-
-            // Call the ShowDialog method to show the dialog box.
-            DialogResult userClickedOK = openFileDialog1.ShowDialog();
-
-            // Process input if the user clicked OK.
-            if (userClickedOK == System.Windows.Forms.DialogResult.OK)
+            clearValue();
+            try
             {
-                // Open the selected file to read.
-                string pathFile = openFileDialog1.FileName;
-                string data = System.IO.File.ReadAllText(pathFile);
-                JObject jobject = JObject.Parse(data);
+                if(_groupquestion != null)
+                {
+                    DialogResult dialogResult = MessageBox.Show("Bạn có muốn lưu bạn hiện tại không?", "Lưu", MessageBoxButtons.YesNoCancel);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        _groupquestion.SaveToFile(tbQuestionGroupName.Text, tbAddress.Text);
+                    }
 
-                _groupquestion.convertFromJObjcet(jobject);
-            }          
+                    if(dialogResult == DialogResult.Cancel)
+                    {
+                        return;
+                    }
+                }
+
+                String Location = String.Empty;
+                OpenFileDialog frm = new OpenFileDialog();
+                frm.InitializeLifetimeService();
+                frm.Filter = "Bộ đề (*.json)|*.json";
+                frm.Title = "Browse Config file";
+                DialogResult ret = STAShowDialog(frm);
+
+
+                if (ret == DialogResult.OK)
+                    Location = frm.FileName;
+                if (Location != "")
+                {
+                    _groupquestion.LoadFromFile(Location);
+                    updateListQuestions();
+                    tbAddress.Text = _groupquestion.Address;
+                    tbQuestionGroupName.Text = _groupquestion.Name;
+                }                 
+            }
+            catch (Exception ex)
+            {
+                MyLogSystem.Log(ex.ToString());
+            }
+        }
+
+        private void updateListQuestions()
+        {
+            for (int i = 0; i < _groupquestion.questions.Count; i++)
+            {
+                addQuestionToLvQuestion(_groupquestion.questions[i]);
+            }
+        }
+
+        private void newGroupQuestion_Click(object sender, EventArgs e)
+        {
+            clearValue();
+            _groupquestion = new MyGroupQuestion();
+        }
+
+        private void lvListQuestion_DoubleClick(object sender, EventArgs e)
+        {
+            if (lvListQuestion.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Bạn chưa chọn câu hỏi nào!");
+                return;
+            }
+
+            DialogResult dialogResult = MessageBox.Show("Bạn chắc chắn muốn chỉnh sửa câu hỏi này? /n Mọi thông tin câu hỏi hiện tại sẽ bị thay đổi!", "Xóa", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                MyBaseQuestion question = _groupquestion.getQuestion(Int32.Parse(lvListQuestion.SelectedItems[0].Text));
+
+                if (question != null)
+                {
+                    _current_question_id = question.Id;
+                    loadQuestionToForm(question);
+                }
+            }
+        }
+
+        private void saveFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _groupquestion.SaveToFile(tbQuestionGroupName.Text, tbAddress.Text);            
+        }
+
+        private void thoátToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Ban co muon luu bo cau hoi nay khong?", "Xóa", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                _groupquestion.SaveToFile(tbQuestionGroupName.Text, tbAddress.Text);
+            }
+
+            this.Close();
+        }
+
+        /* STAShowDialog takes a FileDialog and shows it on a background STA thread and returns the results.
+        * Usage:
+        *   OpenFileDialog d = new OpenFileDialog();
+        *   DialogResult ret = STAShowDialog(d);
+        *   if (ret == DialogResult.OK)
+        *      MessageBox.Show(d.FileName);
+        */
+        private DialogResult STAShowDialog(FileDialog dialog)
+        {
+            DialogState state = new DialogState();
+            state.dialog = dialog;
+            System.Threading.Thread t = new System.Threading.Thread(state.ThreadProcShowDialog);
+            t.SetApartmentState(System.Threading.ApartmentState.STA);
+            t.Start();
+            t.Join();
+            return state.result;
+        }
+
+        private void lưuNhưToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            String Location = String.Empty;
+            SaveFileDialog frm = new SaveFileDialog();
+            frm.InitializeLifetimeService();
+            frm.Filter = "Bộ đề (*.json)|*.json";
+            frm.Title = "Browse Config file";
+            DialogResult ret = STAShowDialog(frm);
+
+
+            if (ret == DialogResult.OK)
+            {
+                Location = frm.FileName;
+                tbAddress.Text = Location;
+
+                if (Location != "")
+                {
+                    _groupquestion.SaveToFile(tbQuestionGroupName.Text, tbAddress.Text);
+                }
+            }
+        }
+
+        private void rbOneChoice_CheckedChanged(object sender, EventArgs e)
+        {
+            gbFillMissingField.Hide();
+            gbAnswer.Show();
+        }
+
+        private void rbMultiQuestion_CheckedChanged(object sender, EventArgs e)
+        {
+            gbFillMissingField.Hide();
+            gbAnswer.Show();
+        }
+
+        private void rbMissingField_CheckedChanged(object sender, EventArgs e)
+        {
+            gbFillMissingField.Show();
+            gbAnswer.Hide();
         }
     }
 }

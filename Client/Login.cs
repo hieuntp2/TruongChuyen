@@ -55,7 +55,7 @@ namespace Client
             MyTransactionFactory factory = MyTransactionFactory.getInstance();
             MyBaseTransaction transaction = factory.createTransaction(jObject);
 
-            switch (transaction._myTransactioncode)
+            switch (transaction.MyTransactioncode)
             { 
                 case Transaction_Code.sv_incorrect_info:
                     MessageBox.Show("Password not match!");
@@ -78,7 +78,7 @@ namespace Client
         private void Login_FormClosed(object sender, FormClosedEventArgs e)
         {
             MyBaseTransaction info = new MyBaseTransaction();
-            info._myTransactioncode = Transaction_Code.cl_disconnect;
+            info.MyTransactioncode = Transaction_Code.cl_disconnect;
             _mysendFactory.sendJsonObject(info);           
             _socketMange.stopConnection();
         }

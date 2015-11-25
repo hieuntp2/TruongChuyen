@@ -68,6 +68,13 @@ namespace MyTransactionCode.MyQuestion
         public List<MyBaseQuestion> questions;
         public string address;
         public string name;
+        private int _currentIndexQuestion;
+
+        public int CurrentIndexQuestion
+        {
+            get { return _currentIndexQuestion; }
+            set { _currentIndexQuestion = value; }
+        }
 
         public string Name
         {
@@ -84,16 +91,14 @@ namespace MyTransactionCode.MyQuestion
         public MyGroupQuestion()
         {
             questions = new List<MyBaseQuestion>();
+            _currentIndexQuestion = -1;
         }
 
         public void LoadFromFile(string address)
         {
-
-        }
-
-        public void SaveToFile(string address)
-        {
-
+            string data = System.IO.File.ReadAllText(address);
+            JObject jobject = JObject.Parse(data);
+            this.convertFromJObjcet(jobject);
         }
 
         /// <summary>
@@ -133,15 +138,15 @@ namespace MyTransactionCode.MyQuestion
             return null;
         }
 
-        public void SaveToFile()
+        public void SaveToFile(string name, string path)
         {
+            this.name = name;
+            this.address = path;
             // convert oject to json string
             StringBuilder data = new StringBuilder();
             data.Append(JsonConvert.SerializeObject(this));
-            //string sdata = JsonConvert.SerializeObject(this);
-            //System.IO.File.WriteAllText(this.Address + this.name + ".json", sdata);
-
-            System.IO.StreamWriter file = new System.IO.StreamWriter(this.Address + this.name + ".json");
+            
+            System.IO.StreamWriter file = new System.IO.StreamWriter(path);
             file.WriteLine(data);
             file.Close();
         }
@@ -182,6 +187,28 @@ namespace MyTransactionCode.MyQuestion
 
                 questions.Add(question);
             }
+        }
+
+        public void updateQuestion(MyBaseQuestion question)
+        {
+            for(int i = 0; i < questions.Count; i++)
+            {
+                if(questions[i].Id == question.Id)
+                {
+                    questions[i] = question;
+                }
+            }
+        }
+
+        public MyBaseQuestion getNextQuestion()
+        {
+            CurrentIndexQuestion += 1;
+            if(CurrentIndexQuestion >= questions.Count)
+            {
+                CurrentIndexQuestion = questions.Count;
+                return null;
+            }            
+            return questions[CurrentIndexQuestion];
         }
     }
 }

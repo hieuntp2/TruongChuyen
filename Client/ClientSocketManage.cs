@@ -1,4 +1,6 @@
-﻿using System.Net.Sockets;
+﻿using MyTransactionCode;
+using System;
+using System.Net.Sockets;
 using System.Threading;
 
 namespace Client
@@ -40,8 +42,9 @@ namespace Client
                 _socket.Connect(ipServer, 8888);
                 return true;
             }
-            catch
+            catch(Exception ex)
             {
+                MyLogSystem.Log(ex.ToString());
                 return false;
             }
             return false;

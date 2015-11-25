@@ -33,9 +33,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tạoBộCâuHỏiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newGroupQuestion = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.openFromFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.lưuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.saveFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lưuNhưToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.thoátToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bộCâuHỏiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.chỉnhSửaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,7 +56,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.tbTime = new System.Windows.Forms.NumericUpDown();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.gbAnswer = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.tbChoiceB = new System.Windows.Forms.TextBox();
@@ -64,24 +68,25 @@
             this.tbQuestion = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.tbQuestionGroupName = new System.Windows.Forms.TextBox();
-            this.saveFile = new System.Windows.Forms.Button();
             this.lvListQuestion = new System.Windows.Forms.ListView();
             this.id = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.question = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tbAddress = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.btSaveFileDialog = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.btListQuestionEdit = new System.Windows.Forms.Button();
             this.btListQuestionDelete = new System.Windows.Forms.Button();
+            this.gbFillMissingField = new System.Windows.Forms.GroupBox();
+            this.tbClientAnswer = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.gbOneChoiceQuestion.SuspendLayout();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbTime)).BeginInit();
-            this.groupBox3.SuspendLayout();
+            this.gbAnswer.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.gbFillMissingField.SuspendLayout();
             this.SuspendLayout();
             // 
             // tbChoiceA
@@ -110,7 +115,6 @@
             this.label1.Size = new System.Drawing.Size(79, 13);
             this.label1.TabIndex = 2;
             this.label1.Text = "Tên bộ câu hỏi";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // menuStrip1
             // 
@@ -126,19 +130,29 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tạoBộCâuHỏiToolStripMenuItem,
+            this.newGroupQuestion,
+            this.toolStripSeparator1,
             this.openFromFile,
-            this.lưuToolStripMenuItem,
+            this.toolStripSeparator3,
+            this.saveFileToolStripMenuItem,
+            this.lưuNhưToolStripMenuItem,
+            this.toolStripSeparator2,
             this.thoátToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
-            // tạoBộCâuHỏiToolStripMenuItem
+            // newGroupQuestion
             // 
-            this.tạoBộCâuHỏiToolStripMenuItem.Name = "tạoBộCâuHỏiToolStripMenuItem";
-            this.tạoBộCâuHỏiToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
-            this.tạoBộCâuHỏiToolStripMenuItem.Text = "Tạo bộ câu hỏi";
+            this.newGroupQuestion.Name = "newGroupQuestion";
+            this.newGroupQuestion.Size = new System.Drawing.Size(153, 22);
+            this.newGroupQuestion.Text = "Tạo bộ câu hỏi";
+            this.newGroupQuestion.Click += new System.EventHandler(this.newGroupQuestion_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(150, 6);
             // 
             // openFromFile
             // 
@@ -147,17 +161,36 @@
             this.openFromFile.Text = "Mở bộ câu hỏi";
             this.openFromFile.Click += new System.EventHandler(this.openFromFile_Click);
             // 
-            // lưuToolStripMenuItem
+            // toolStripSeparator3
             // 
-            this.lưuToolStripMenuItem.Name = "lưuToolStripMenuItem";
-            this.lưuToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
-            this.lưuToolStripMenuItem.Text = "Lưu";
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(150, 6);
+            // 
+            // saveFileToolStripMenuItem
+            // 
+            this.saveFileToolStripMenuItem.Name = "saveFileToolStripMenuItem";
+            this.saveFileToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.saveFileToolStripMenuItem.Text = "Lưu";
+            this.saveFileToolStripMenuItem.Click += new System.EventHandler(this.saveFileToolStripMenuItem_Click);
+            // 
+            // lưuNhưToolStripMenuItem
+            // 
+            this.lưuNhưToolStripMenuItem.Name = "lưuNhưToolStripMenuItem";
+            this.lưuNhưToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.lưuNhưToolStripMenuItem.Text = "Lưu bản khác";
+            this.lưuNhưToolStripMenuItem.Click += new System.EventHandler(this.lưuNhưToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(150, 6);
             // 
             // thoátToolStripMenuItem
             // 
             this.thoátToolStripMenuItem.Name = "thoátToolStripMenuItem";
             this.thoátToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.thoátToolStripMenuItem.Text = "Thoát";
+            this.thoátToolStripMenuItem.Click += new System.EventHandler(this.thoátToolStripMenuItem_Click);
             // 
             // bộCâuHỏiToolStripMenuItem
             // 
@@ -188,24 +221,26 @@
             // rbMultiQuestion
             // 
             this.rbMultiQuestion.AutoSize = true;
-            this.rbMultiQuestion.Location = new System.Drawing.Point(6, 42);
+            this.rbMultiQuestion.Location = new System.Drawing.Point(6, 65);
             this.rbMultiQuestion.Name = "rbMultiQuestion";
-            this.rbMultiQuestion.Size = new System.Drawing.Size(82, 17);
+            this.rbMultiQuestion.Size = new System.Drawing.Size(90, 17);
             this.rbMultiQuestion.TabIndex = 8;
             this.rbMultiQuestion.TabStop = true;
-            this.rbMultiQuestion.Text = "Điền khuyết";
+            this.rbMultiQuestion.Text = "Nhiều đáp án";
             this.rbMultiQuestion.UseVisualStyleBackColor = true;
+            this.rbMultiQuestion.CheckedChanged += new System.EventHandler(this.rbMultiQuestion_CheckedChanged);
             // 
             // rbMissingField
             // 
             this.rbMissingField.AutoSize = true;
-            this.rbMissingField.Location = new System.Drawing.Point(6, 67);
+            this.rbMissingField.Location = new System.Drawing.Point(6, 42);
             this.rbMissingField.Name = "rbMissingField";
-            this.rbMissingField.Size = new System.Drawing.Size(88, 17);
+            this.rbMissingField.Size = new System.Drawing.Size(82, 17);
             this.rbMissingField.TabIndex = 7;
             this.rbMissingField.TabStop = true;
-            this.rbMissingField.Text = "nhiều đáp án";
+            this.rbMissingField.Text = "Điền khuyết";
             this.rbMissingField.UseVisualStyleBackColor = true;
+            this.rbMissingField.CheckedChanged += new System.EventHandler(this.rbMissingField_CheckedChanged);
             // 
             // rbOneChoice
             // 
@@ -217,16 +252,18 @@
             this.rbOneChoice.TabStop = true;
             this.rbOneChoice.Text = "1 đán án";
             this.rbOneChoice.UseVisualStyleBackColor = true;
+            this.rbOneChoice.CheckedChanged += new System.EventHandler(this.rbOneChoice_CheckedChanged);
             // 
             // gbOneChoiceQuestion
             // 
+            this.gbOneChoiceQuestion.Controls.Add(this.gbFillMissingField);
             this.gbOneChoiceQuestion.Controls.Add(this.groupBox4);
-            this.gbOneChoiceQuestion.Controls.Add(this.groupBox3);
+            this.gbOneChoiceQuestion.Controls.Add(this.gbAnswer);
             this.gbOneChoiceQuestion.Controls.Add(this.groupBox2);
             this.gbOneChoiceQuestion.Location = new System.Drawing.Point(168, 27);
             this.gbOneChoiceQuestion.Name = "gbOneChoiceQuestion";
             this.gbOneChoiceQuestion.Size = new System.Drawing.Size(740, 419);
-            this.gbOneChoiceQuestion.TabIndex = 5;
+            this.gbOneChoiceQuestion.TabIndex = 0;
             this.gbOneChoiceQuestion.TabStop = false;
             this.gbOneChoiceQuestion.Text = "Nội dung câu hỏi";
             // 
@@ -283,7 +320,7 @@
             this.tbAnswer.Multiline = true;
             this.tbAnswer.Name = "tbAnswer";
             this.tbAnswer.Size = new System.Drawing.Size(376, 20);
-            this.tbAnswer.TabIndex = 19;
+            this.tbAnswer.TabIndex = 0;
             // 
             // label9
             // 
@@ -293,7 +330,6 @@
             this.label9.Size = new System.Drawing.Size(57, 13);
             this.label9.TabIndex = 14;
             this.label9.Text = "Câu trả lời:";
-            this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
             // label4
             // 
@@ -309,29 +345,29 @@
             this.tbTime.Location = new System.Drawing.Point(69, 67);
             this.tbTime.Name = "tbTime";
             this.tbTime.Size = new System.Drawing.Size(120, 20);
-            this.tbTime.TabIndex = 14;
+            this.tbTime.TabIndex = 1;
             this.tbTime.Value = new decimal(new int[] {
             30,
             0,
             0,
             0});
             // 
-            // groupBox3
+            // gbAnswer
             // 
-            this.groupBox3.Controls.Add(this.tbChoiceA);
-            this.groupBox3.Controls.Add(this.label5);
-            this.groupBox3.Controls.Add(this.label6);
-            this.groupBox3.Controls.Add(this.tbChoiceB);
-            this.groupBox3.Controls.Add(this.label7);
-            this.groupBox3.Controls.Add(this.tbChoiceC);
-            this.groupBox3.Controls.Add(this.label8);
-            this.groupBox3.Controls.Add(this.tbChoiceD);
-            this.groupBox3.Location = new System.Drawing.Point(9, 182);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(728, 125);
-            this.groupBox3.TabIndex = 20;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Trả lời";
+            this.gbAnswer.Controls.Add(this.tbChoiceA);
+            this.gbAnswer.Controls.Add(this.label5);
+            this.gbAnswer.Controls.Add(this.label6);
+            this.gbAnswer.Controls.Add(this.tbChoiceB);
+            this.gbAnswer.Controls.Add(this.label7);
+            this.gbAnswer.Controls.Add(this.tbChoiceC);
+            this.gbAnswer.Controls.Add(this.label8);
+            this.gbAnswer.Controls.Add(this.tbChoiceD);
+            this.gbAnswer.Location = new System.Drawing.Point(9, 182);
+            this.gbAnswer.Name = "gbAnswer";
+            this.gbAnswer.Size = new System.Drawing.Size(728, 125);
+            this.gbAnswer.TabIndex = 1;
+            this.gbAnswer.TabStop = false;
+            this.gbAnswer.Text = "Trả lời";
             // 
             // label5
             // 
@@ -357,7 +393,7 @@
             this.tbChoiceB.Multiline = true;
             this.tbChoiceB.Name = "tbChoiceB";
             this.tbChoiceB.Size = new System.Drawing.Size(652, 20);
-            this.tbChoiceB.TabIndex = 11;
+            this.tbChoiceB.TabIndex = 1;
             // 
             // label7
             // 
@@ -374,7 +410,7 @@
             this.tbChoiceC.Multiline = true;
             this.tbChoiceC.Name = "tbChoiceC";
             this.tbChoiceC.Size = new System.Drawing.Size(652, 20);
-            this.tbChoiceC.TabIndex = 12;
+            this.tbChoiceC.TabIndex = 2;
             // 
             // label8
             // 
@@ -391,7 +427,7 @@
             this.tbChoiceD.Multiline = true;
             this.tbChoiceD.Name = "tbChoiceD";
             this.tbChoiceD.Size = new System.Drawing.Size(652, 20);
-            this.tbChoiceD.TabIndex = 13;
+            this.tbChoiceD.TabIndex = 3;
             // 
             // groupBox2
             // 
@@ -399,7 +435,7 @@
             this.groupBox2.Location = new System.Drawing.Point(9, 16);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(722, 160);
-            this.groupBox2.TabIndex = 11;
+            this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Câu hỏi";
             // 
@@ -409,7 +445,7 @@
             this.tbQuestion.Multiline = true;
             this.tbQuestion.Name = "tbQuestion";
             this.tbQuestion.Size = new System.Drawing.Size(710, 140);
-            this.tbQuestion.TabIndex = 11;
+            this.tbQuestion.TabIndex = 0;
             // 
             // button2
             // 
@@ -427,16 +463,6 @@
             this.tbQuestionGroupName.Size = new System.Drawing.Size(150, 20);
             this.tbQuestionGroupName.TabIndex = 10;
             // 
-            // saveFile
-            // 
-            this.saveFile.Location = new System.Drawing.Point(12, 69);
-            this.saveFile.Name = "saveFile";
-            this.saveFile.Size = new System.Drawing.Size(150, 28);
-            this.saveFile.TabIndex = 11;
-            this.saveFile.Text = " Lưu bộ câu hỏi";
-            this.saveFile.UseVisualStyleBackColor = true;
-            this.saveFile.Click += new System.EventHandler(this.saveFile_Click);
-            // 
             // lvListQuestion
             // 
             this.lvListQuestion.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -448,6 +474,7 @@
             this.lvListQuestion.TabIndex = 13;
             this.lvListQuestion.UseCompatibleStateImageBehavior = false;
             this.lvListQuestion.View = System.Windows.Forms.View.Details;
+            this.lvListQuestion.DoubleClick += new System.EventHandler(this.lvListQuestion_DoubleClick);
             // 
             // id
             // 
@@ -463,7 +490,7 @@
             // 
             this.tbAddress.Location = new System.Drawing.Point(434, 457);
             this.tbAddress.Name = "tbAddress";
-            this.tbAddress.Size = new System.Drawing.Size(394, 20);
+            this.tbAddress.Size = new System.Drawing.Size(474, 20);
             this.tbAddress.TabIndex = 14;
             // 
             // label2
@@ -474,16 +501,6 @@
             this.label2.Size = new System.Drawing.Size(63, 13);
             this.label2.TabIndex = 22;
             this.label2.Text = "File address";
-            // 
-            // btSaveFileDialog
-            // 
-            this.btSaveFileDialog.Location = new System.Drawing.Point(834, 452);
-            this.btSaveFileDialog.Name = "btSaveFileDialog";
-            this.btSaveFileDialog.Size = new System.Drawing.Size(59, 28);
-            this.btSaveFileDialog.TabIndex = 23;
-            this.btSaveFileDialog.Text = "File";
-            this.btSaveFileDialog.UseVisualStyleBackColor = true;
-            this.btSaveFileDialog.Click += new System.EventHandler(this.btSaveFileDialog_Click);
             // 
             // openFileDialog1
             // 
@@ -509,6 +526,24 @@
             this.btListQuestionDelete.UseVisualStyleBackColor = true;
             this.btListQuestionDelete.Click += new System.EventHandler(this.btListQuestionDelete_Click);
             // 
+            // gbFillMissingField
+            // 
+            this.gbFillMissingField.Controls.Add(this.tbClientAnswer);
+            this.gbFillMissingField.Location = new System.Drawing.Point(7, 182);
+            this.gbFillMissingField.Name = "gbFillMissingField";
+            this.gbFillMissingField.Size = new System.Drawing.Size(727, 125);
+            this.gbFillMissingField.TabIndex = 28;
+            this.gbFillMissingField.TabStop = false;
+            this.gbFillMissingField.Text = "Trả lời";
+            // 
+            // tbClientAnswer
+            // 
+            this.tbClientAnswer.Location = new System.Drawing.Point(7, 19);
+            this.tbClientAnswer.Multiline = true;
+            this.tbClientAnswer.Name = "tbClientAnswer";
+            this.tbClientAnswer.Size = new System.Drawing.Size(714, 96);
+            this.tbClientAnswer.TabIndex = 27;
+            // 
             // CreateQuestion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -516,11 +551,9 @@
             this.ClientSize = new System.Drawing.Size(920, 492);
             this.Controls.Add(this.btListQuestionDelete);
             this.Controls.Add(this.btListQuestionEdit);
-            this.Controls.Add(this.btSaveFileDialog);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.tbAddress);
             this.Controls.Add(this.lvListQuestion);
-            this.Controls.Add(this.saveFile);
             this.Controls.Add(this.tbQuestionGroupName);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.gbOneChoiceQuestion);
@@ -540,10 +573,12 @@
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbTime)).EndInit();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
+            this.gbAnswer.ResumeLayout(false);
+            this.gbAnswer.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.gbFillMissingField.ResumeLayout(false);
+            this.gbFillMissingField.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -563,12 +598,12 @@
         private System.Windows.Forms.GroupBox gbOneChoiceQuestion;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox tbQuestionGroupName;
-        private System.Windows.Forms.ToolStripMenuItem tạoBộCâuHỏiToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem lưuToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem newGroupQuestion;
+        private System.Windows.Forms.ToolStripMenuItem saveFileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem thoátToolStripMenuItem;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox tbQuestion;
-        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.GroupBox gbAnswer;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox tbChoiceB;
@@ -585,18 +620,22 @@
         private System.Windows.Forms.ToolStripMenuItem chỉnhSửaToolStripMenuItem;
         private System.Windows.Forms.RadioButton rdExactlyChoise;
         private System.Windows.Forms.RadioButton rbdNotExactlyChoice;
-        private System.Windows.Forms.Button saveFile;
         private System.Windows.Forms.ListView lvListQuestion;
         private System.Windows.Forms.ColumnHeader id;
         private System.Windows.Forms.ColumnHeader question;
         private System.Windows.Forms.ToolStripMenuItem openFromFile;
         private System.Windows.Forms.TextBox tbAddress;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button btSaveFileDialog;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btListQuestionEdit;
         private System.Windows.Forms.Button btListQuestionDelete;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem lưuNhưToolStripMenuItem;
+        private System.Windows.Forms.GroupBox gbFillMissingField;
+        private System.Windows.Forms.TextBox tbClientAnswer;
     }
 }

@@ -1,12 +1,15 @@
 ﻿using MyTransactionCode;
+using MyTransactionCode.MyQuestion;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
 using System.Net.Sockets;
+using System.Text;
 
 namespace NCKH3.Class
 {
-    class MyClient
+    public class MyClient
     {
         private int id = -1;
         private static int NEXT_ID_NUMBER = 0;
@@ -15,13 +18,29 @@ namespace NCKH3.Class
 
         private int _idThread;
         private string username;
+
+        public string Username
+        {
+            get { return username; }
+            set { username = value; }
+        }
         private TcpClient _socket;
 
         private ServerTheadingManage _threadManage;
         private MySendFactory _mysendFactory;
 
-        public MyClient(TcpClient socketClient)
+        private List<string> _listQuestionAnswereds;
+
+        public List<string> ListQuestionAnswereds
         {
+            get { return _listQuestionAnswereds; }
+            set { _listQuestionAnswereds = value; }
+        }
+        private int _currentIndexQuestion = -1;
+
+        public MyClient(TcpClient socketClient, Server currentForm)
+        {
+            setCurrentForm(currentForm);
             id = NEXT_ID_NUMBER;
             NEXT_ID_NUMBER += 1;
             _socket = socketClient;
@@ -32,6 +51,7 @@ namespace NCKH3.Class
             _threadManage.startInstance(_idThread);
 
             _mysendFactory = new MySendFactory(_socket);
+            _listQuestionAnswereds = new List<string>();
         }
 
         public int getId()
@@ -55,16 +75,13 @@ namespace NCKH3.Class
                     byte[] bytesFrom = new byte[10025];
                     networkStream.Read(bytesFrom, 0, (int)_socket.ReceiveBufferSize);
                     string dataFromClient = System.Text.Encoding.ASCII.GetString(bytesFrom);
-                    //dataFromClient = dataFromClient.Substring(0, dataFromClient.IndexOf("$"));
-
-                    _currentForm.addToReceiverText(id + ": " +  dataFromClient);
-
                     processRequest(dataFromClient);
                 }
-                catch
+                catch (Exception ex)
                 {
                     Stop();
-                    _currentForm.addToReceiverText("Client " + id + " has disconnect from server!");                   
+                    _currentForm.addToReceiverText(">> Client " + id + " đã ngắt kết nối");
+                    MyLogSystem.Log(ex.ToString());
                 }
             }
         }
@@ -76,7 +93,7 @@ namespace NCKH3.Class
             MyTransactionFactory factory = MyTransactionFactory.getInstance();
             MyBaseTransaction transaction = factory.createTransaction(jObject);
 
-            switch(transaction._myTransactioncode)
+            switch (transaction.MyTransactioncode)
             {
                 case Transaction_Code.cl_client_connect_infor:
                     string _password = _currentForm.getPassword();
@@ -84,35 +101,37 @@ namespace NCKH3.Class
                     if (_password == transactionoff.password)
                     {
                         // if password is match
-                        this.username = transactionoff.username;
+                        this.Username = transactionoff.username;
                         MyBaseTransaction info = new MyBaseTransaction();
-                        info._myTransactioncode = Transaction_Code.sv_login_accept;
+                        info.MyTransactioncode = Transaction_Code.sv_login_accept;
                         _mysendFactory.sendJsonObject(info);
+                        _currentForm.addClientToListView(this);
+
+                        _currentForm.addToReceiverText(">> User có id: " + id + " có tên: " + username);
                     }
                     else
                     {
                         // if password not match
+                        _currentForm.addToReceiverText(">> User có id: " + id + " thử kết nối nhưng không đúng mật khẩu.");
                         _mysendFactory.quickSendJsonObject(Transaction_Code.sv_incorrect_info);
                     }
                     break;
                 case Transaction_Code.cl_disconnect:
                     Stop();
+                    _currentForm.addToReceiverText(">> User " + username + "(" + id + ") đã ngắt kết nối!");
                     break;
-                case Transaction_Code.sv_client_connect:
+                case Transaction_Code.cl_answer_question:
+                    MyTr_Cl_AnswerQuestion trans_answer = new MyTr_Cl_AnswerQuestion();
+                    trans_answer = factory.recreateMyTr_Cl_AnswerQuestion(jObject);
+                    _currentForm.updateClientAnswer(this, trans_answer.Answer);
+                    setClientAnswer(trans_answer.Answer, _currentIndexQuestion);
                     break;
-                case Transaction_Code.sv_client_disconnect:
-                    break;
-                case Transaction_Code.sv_disconnect:
-                    break;
-                case Transaction_Code.sv_incorrect_info:
-                    break;
-                case Transaction_Code.sv_login_accept:
-                    break;               
             }
         }
 
         public void Stop()
         {
+            _currentForm.removeClientFromListView(this);
             isRunning = false;
             _socket.Close();
             _threadManage.stopInstance(_idThread);
@@ -120,10 +139,62 @@ namespace NCKH3.Class
             manage.RemoveClient(this);
         }
 
-
         internal void sendTransaction(MyBaseTransaction transaction)
         {
+            if (transaction.MyTransactioncode == Transaction_Code.sv_question)
+            {
+                _currentIndexQuestion += 1;
+            }
             _mysendFactory.sendJsonObject(transaction);
+        }
+
+        public void setMaxGroupAnswer(int maxQuestion)
+        {
+            ListQuestionAnswereds = new List<string>(maxQuestion);
+            _currentIndexQuestion = -1;
+            for (int i = 0; i < maxQuestion; i++)
+            {
+                ListQuestionAnswereds.Add("");
+            }
+        }
+
+        public void setClientAnswer(string answer, int index)
+        {
+            ListQuestionAnswereds[index] = answer;
+        }
+
+        internal void writeResultToFile(string pathFile, MyGroupQuestion groupQuestion)
+        {
+            System.IO.StreamWriter file = new System.IO.StreamWriter(pathFile, true);
+
+            // Tên Client
+            file.WriteLine("===========================");
+            file.WriteLine("Tên: " + this.username);
+
+            // Kết quả client
+            for (int i = 0; i < ListQuestionAnswereds.Count; i++)
+            {
+                file.Write("Câu hỏi số: " + i + ". Đáp án: " +  ListQuestionAnswereds[i] + ", đáp án: " + groupQuestion.questions[i].Answer + ": ");
+
+                string myClientAnswer = ListQuestionAnswereds[i];
+                string myQuestionAnswer = groupQuestion.questions[i].Answer;
+
+                if (groupQuestion.questions[i].isUpcase == false)
+                {
+                    myClientAnswer = myClientAnswer.ToLower();
+                    myQuestionAnswer = myQuestionAnswer.ToLower();
+                }
+
+                if (myQuestionAnswer == myClientAnswer)
+                {
+                    file.WriteLine("Đúng");
+                }
+                else
+                {
+                    file.WriteLine("Sai");
+                }
+            }
+            file.Close();
         }
     }
 }
