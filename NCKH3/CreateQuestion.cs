@@ -350,7 +350,7 @@ namespace NCKH3
 
         private void openFromFile_Click(object sender, EventArgs e)
         {
-            string Location = "";
+            String Location = String.Empty;
             try
             {
                 // Kiểm tra xem có bộ câu hỏi nào đang mở hay không
@@ -373,7 +373,7 @@ namespace NCKH3
                 
 
                 clearValue();
-                String Location = String.Empty;
+                
 
                 OpenFileDialog frm = new OpenFileDialog();
                 frm.InitializeLifetimeService();
