@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.sendAnswer = new System.Windows.Forms.Button();
-            this.tbMessage = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.gbFillMissingField = new System.Windows.Forms.GroupBox();
             this.tbClientAnswer = new System.Windows.Forms.TextBox();
@@ -53,7 +52,6 @@
             this.txQuestion = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.tmProcessBar = new System.Windows.Forms.Timer(this.components);
-            this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.thoátToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -72,15 +70,6 @@
             this.sendAnswer.Text = "Gửi";
             this.sendAnswer.UseVisualStyleBackColor = true;
             this.sendAnswer.Click += new System.EventHandler(this.sendAnswer_Click);
-            // 
-            // tbMessage
-            // 
-            this.tbMessage.Location = new System.Drawing.Point(742, 64);
-            this.tbMessage.Multiline = true;
-            this.tbMessage.Name = "tbMessage";
-            this.tbMessage.ReadOnly = true;
-            this.tbMessage.Size = new System.Drawing.Size(209, 278);
-            this.tbMessage.TabIndex = 1;
             // 
             // groupBox2
             // 
@@ -300,22 +289,13 @@
             // 
             this.tmProcessBar.Tick += new System.EventHandler(this.tmProcessBar_Tick);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(742, 47);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(50, 13);
-            this.label1.TabIndex = 26;
-            this.label1.Text = "Message";
-            // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(963, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(751, 24);
             this.menuStrip1.TabIndex = 27;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -338,10 +318,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(963, 487);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(751, 482);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.tbMessage);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Client";
@@ -363,7 +341,6 @@
         #endregion
 
         private System.Windows.Forms.Button sendAnswer;
-        private System.Windows.Forms.TextBox tbMessage;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label lbCurrentTime;
@@ -383,7 +360,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Timer tmProcessBar;
         private System.Windows.Forms.Button btChoiseA;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem thoátToolStripMenuItem;

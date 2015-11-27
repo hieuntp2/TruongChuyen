@@ -68,6 +68,7 @@ namespace MyTransactionCode
             _question.choiceD = question["Question"]["choiceD"].ToString();
             _question.Question = question["Question"]["Question"].ToString();
             _question.Time = int.Parse(question["Question"]["Time"].ToString());
+            _question.Score = int.Parse(question["Question"]["Score"].ToString());
 
             int type = int.Parse(question["Question"]["type"].ToString());
 
@@ -104,7 +105,7 @@ namespace MyTransactionCode
         public MyTr_Cl_AnswerQuestion(JObject question)
         {
             MyTransactioncode = Transaction_Code.cl_answer_question;
-            this.Answer = question["Answer"].ToString();            
+            this.Answer = question["Answer"].ToString();
         }
 
         public string Answer;
@@ -169,7 +170,7 @@ namespace MyTransactionCode
                     break;
                 case "10":
                     defaulttransaction.MyTransactioncode = Transaction_Code.sv_end_questions;
-                    break;                    
+                    break;
             }
             return defaulttransaction;
         }

@@ -77,6 +77,8 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.btListQuestionEdit = new System.Windows.Forms.Button();
             this.btListQuestionDelete = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
+            this.tbScore = new System.Windows.Forms.NumericUpDown();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.gbOneChoiceQuestion.SuspendLayout();
@@ -84,6 +86,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.tbTime)).BeginInit();
             this.gbAnswer.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbScore)).BeginInit();
             this.SuspendLayout();
             // 
             // tbChoiceA
@@ -265,6 +268,8 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.label10);
+            this.groupBox4.Controls.Add(this.tbScore);
             this.groupBox4.Controls.Add(this.label3);
             this.groupBox4.Controls.Add(this.rdExactlyChoise);
             this.groupBox4.Controls.Add(this.rbdNotExactlyChoice);
@@ -522,6 +527,27 @@
             this.btListQuestionDelete.UseVisualStyleBackColor = true;
             this.btListQuestionDelete.Click += new System.EventHandler(this.btListQuestionDelete_Click);
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(254, 71);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(31, 13);
+            this.label10.TabIndex = 24;
+            this.label10.Text = "Điểm";
+            // 
+            // tbScore
+            // 
+            this.tbScore.Location = new System.Drawing.Point(297, 69);
+            this.tbScore.Name = "tbScore";
+            this.tbScore.Size = new System.Drawing.Size(120, 20);
+            this.tbScore.TabIndex = 23;
+            this.tbScore.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
             // CreateQuestion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -555,6 +581,7 @@
             this.gbAnswer.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbScore)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -611,5 +638,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem lưuNhưToolStripMenuItem;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.NumericUpDown tbScore;
     }
 }

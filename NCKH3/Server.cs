@@ -378,20 +378,26 @@ namespace NCKH3
 
         private void Server_FormClosing(object sender, FormClosingEventArgs e)
         {
+           
+        }
+
+        private void thoátToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             DialogResult dialogResult = MessageBox.Show("Bạn chắc chắn đóng cửa sổ?", "Đóng cửa sổ", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.No)
             {
                 return;
             }
-        }
-
-        private void thoátToolStripMenuItem_Click(object sender, EventArgs e)
-        {
             this.Close();
         }
 
         private void btEndGroupQuestion_Click(object sender, EventArgs e)
         {
+            DialogResult dialogResult = MessageBox.Show("Bạn chắc chắn đóng cửa sổ?", "Đóng cửa sổ", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.No)
+            {
+                return;
+            }
             this.Close();
         }
 

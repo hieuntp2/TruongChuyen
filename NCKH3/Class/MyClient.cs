@@ -166,6 +166,8 @@ namespace NCKH3.Class
 
         internal void writeResultToFile(string pathFile, MyGroupQuestion groupQuestion)
         {
+            int my_score = 0;
+            int my_count_right_answer = 0;
             System.IO.StreamWriter file = new System.IO.StreamWriter(pathFile, true);
 
             // Tên Client
@@ -175,7 +177,12 @@ namespace NCKH3.Class
             // Kết quả client
             for (int i = 0; i < ListQuestionAnswereds.Count; i++)
             {
-                file.Write("Câu hỏi số: " + i + ". Đáp án: " + ListQuestionAnswereds[i] + ", đáp án: " + groupQuestion.questions[i].Answer + ": ");
+                string tempAnswer = ListQuestionAnswereds[i];
+                if(string.IsNullOrWhiteSpace(tempAnswer))
+                {
+                    tempAnswer = "____";
+                }
+                file.Write(string.Format("Cau hoi so: {0}:\t Tra loi: {1},\t Dap an: {2}  => ", i, tempAnswer, groupQuestion.questions[i].Answer));
 
                 string myClientAnswer = ListQuestionAnswereds[i];
                 string myQuestionAnswer = groupQuestion.questions[i].Answer;
@@ -188,13 +195,17 @@ namespace NCKH3.Class
 
                 if (myQuestionAnswer == myClientAnswer)
                 {
-                    file.WriteLine("Đúng");
+                    my_count_right_answer += 1;
+                    my_score += groupQuestion.questions[i].Score;
+                    file.WriteLine("DUNG");
                 }
                 else
                 {
-                    file.WriteLine("Sai");
+                    file.WriteLine("SAI");
                 }
             }
+
+            file.WriteLine("Tong so cau tra loi DUNG: " + my_count_right_answer + ". Tong Diem: " + my_score);
             file.Close();
         }
     }

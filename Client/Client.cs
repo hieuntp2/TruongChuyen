@@ -49,23 +49,7 @@ namespace Client
 
         delegate void SetTextCallback(string text);
 
-        public void addToReceiverText(string text)
-        {
-            string my_new_text = tbMessage.Text + text;
-            // InvokeRequired required compares the thread ID of the
-            // calling thread to the thread ID of the creating thread.
-            // If these threads are different, it returns true.
-            if (this.tbMessage.InvokeRequired)
-            {
-                SetTextCallback d = new SetTextCallback(addToReceiverText);
-                this.Invoke(d, new object[] { text });
-            }
-            else
-            {
-                this.tbMessage.Text = my_new_text + Environment.NewLine;
-            }
-        }
-
+       
         delegate void SetQuestionCallback(MyBaseQuestion question);
 
         public void updateQuestionToForm(MyBaseQuestion question)
@@ -291,6 +275,7 @@ namespace Client
             btChoiseB_.BackColor = DefaultBackColor;
             btChoiseC_.BackColor = DefaultBackColor;
             btChoiseD_.BackColor = DefaultBackColor;
+            tbClientAnswer.Text = "";
         }
 
         private void sendAnswer_Click(object sender, EventArgs e)

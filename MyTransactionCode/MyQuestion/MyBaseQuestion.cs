@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -19,6 +20,7 @@ namespace MyTransactionCode.MyQuestion
         public string ClassName;
         public int Prioriy;
         public int Id;
+        public int Score;
 
         /// <summary>
         /// Nếu yêu cầu phân biệt chữ hoa/thường thì giá trị = true. Không thì giá trị = false;
@@ -128,9 +130,9 @@ namespace MyTransactionCode.MyQuestion
 
         public MyBaseQuestion getQuestion(int p)
         {
-            foreach(MyBaseQuestion q in questions)
+            foreach (MyBaseQuestion q in questions)
             {
-                if(q.Id == p)
+                if (q.Id == p)
                 {
                     return q;
                 }
@@ -145,7 +147,7 @@ namespace MyTransactionCode.MyQuestion
             // convert oject to json string
             StringBuilder data = new StringBuilder();
             data.Append(JsonConvert.SerializeObject(this));
-            
+
             System.IO.StreamWriter file = new System.IO.StreamWriter(path);
             file.WriteLine(data);
             file.Close();
@@ -155,45 +157,72 @@ namespace MyTransactionCode.MyQuestion
         {
             this.address = jobject["Address"].ToString();
             this.name = jobject["Name"].ToString();
-            
-            foreach(var item in jobject["questions"])
-            {
-                MyBaseQuestion question = new MyBaseQuestion();
-                question.Answer = item["Answer"].ToString();
-                question.choiceA = item["choiceA"].ToString();
-                question.choiceB = item["choiceB"].ToString();
-                question.choiceC = item["choiceC"].ToString();
-                question.choiceD = item["choiceD"].ToString();
-                question.ClassName = item["ClassName"].ToString();
-                question.Id = int.Parse(item["Id"].ToString());
-                question.isUpcase = bool.Parse(item["isUpcase"].ToString());
-                question.Prioriy = int.Parse(item["Prioriy"].ToString());
-                question.Question = item["Question"].ToString();
-                question.Time = int.Parse(item["Time"].ToString());
-              
-               
-                switch(int.Parse(item["type"].ToString()))
-                {
-                    case 1:
-                        question.type = MyQuestionType.MyOneChoiceQuestion;
-                        break;
-                    case 2:
-                        question.type = MyQuestionType.MyMultiChoiceQuestion;
-                        break;
-                    case 3:
-                        question.type = MyQuestionType.MyMissingFieldQuestion;
-                        break;
-                }
 
-                questions.Add(question);
+            foreach (var item in jobject["questions"])
+            {
+                try
+                {
+
+
+                    MyBaseQuestion question = new MyBaseQuestion();
+                    question.Answer = item["Answer"].ToString();
+                    question.choiceA = item["choiceA"].ToString();
+                    question.choiceB = item["choiceB"].ToString();
+                    question.choiceC = item["choiceC"].ToString();
+                    question.choiceD = item["choiceD"].ToString();
+                    question.ClassName = item["ClassName"].ToString();
+                    question.Id = int.Parse(item["Id"].ToString());
+                    question.isUpcase = bool.Parse(item["isUpcase"].ToString());
+                    question.Prioriy = int.Parse(item["Prioriy"].ToString());
+                    question.Question = item["Question"].ToString();
+                   
+
+                    if (item["Time"] == null)
+                    {
+                        question.Time = 30;
+                    }
+                    else
+                    {
+                        question.Time = int.Parse(item["Time"].ToString());
+                    }
+
+                    if (item["Score"] == null)
+                    {
+                        question.Score = 1;
+                    }
+                    else
+                    {
+                        question.Score = int.Parse(item["Score"].ToString());
+                    }
+                    
+
+                    switch (int.Parse(item["type"].ToString()))
+                    {
+                        case 1:
+                            question.type = MyQuestionType.MyOneChoiceQuestion;
+                            break;
+                        case 2:
+                            question.type = MyQuestionType.MyMultiChoiceQuestion;
+                            break;
+                        case 3:
+                            question.type = MyQuestionType.MyMissingFieldQuestion;
+                            break;
+                    }
+
+                    questions.Add(question);
+                }
+                catch
+                {
+                    throw new Exception("Có lỗi khi mở câu hỏi! Bộ câu hỏi: " + this.Address);
+                }                
             }
         }
 
         public void updateQuestion(MyBaseQuestion question)
         {
-            for(int i = 0; i < questions.Count; i++)
+            for (int i = 0; i < questions.Count; i++)
             {
-                if(questions[i].Id == question.Id)
+                if (questions[i].Id == question.Id)
                 {
                     questions[i] = question;
                 }
@@ -203,11 +232,11 @@ namespace MyTransactionCode.MyQuestion
         public MyBaseQuestion getNextQuestion()
         {
             CurrentIndexQuestion += 1;
-            if(CurrentIndexQuestion >= questions.Count)
+            if (CurrentIndexQuestion >= questions.Count)
             {
                 CurrentIndexQuestion = questions.Count;
                 return null;
-            }            
+            }
             return questions[CurrentIndexQuestion];
         }
     }

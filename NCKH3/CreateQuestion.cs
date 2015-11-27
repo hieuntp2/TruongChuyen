@@ -59,16 +59,16 @@ namespace NCKH3
             question.choiceB = tbChoiceB.Text;
             question.choiceC = tbChoiceC.Text;
             question.choiceD = tbChoiceD.Text;
-
+            question.Score = (int)tbScore.Value;
             question.Answer = tbAnswer.Text;
 
             if (rbdNotExactlyChoice.Checked)
             {
-                question.isUpcase = true;
+                question.isUpcase = false;
             }
             else
             {
-                question.isUpcase = false;
+                question.isUpcase = true;
             }
 
             if (rbOneChoice.Checked)
@@ -89,6 +89,11 @@ namespace NCKH3
 
         private bool checkInput()
         {
+            if(tbScore.Value <= 0)
+            {
+                MessageBox.Show("Điểm câu hỏi phải lớn hơn không!");
+                return false;
+            }
             // kiểm tra rỗng
             // Nếu là câu hỏi điền khuyết thì chỉ kiểm tra 1 câu trả lời
             if (rbMissingField.Checked)
@@ -177,7 +182,7 @@ namespace NCKH3
             question.choiceB = tbChoiceB.Text;
             question.choiceC = tbChoiceC.Text;
             question.choiceD = tbChoiceD.Text;
-
+            question.Score = (int)tbScore.Value;
             // nếu câu hỏi là câu hỏi điền khuyết
 
             question.Answer = tbAnswer.Text;
@@ -273,7 +278,7 @@ namespace NCKH3
             tbChoiceB.Text = question.choiceB;
             tbChoiceC.Text = question.choiceC;
             tbChoiceD.Text = question.choiceD;
-
+            tbScore.Value = question.Score;
             tbTime.Value = question.Time;
 
             switch (question.type)
@@ -331,7 +336,7 @@ namespace NCKH3
             tbChoiceB.Text = "";
             tbChoiceC.Text = "";
             tbChoiceD.Text = "";
-
+            tbScore.Value = 1;
             tbTime.Value = 30;
 
             rbOneChoice.Checked = true;
@@ -345,11 +350,10 @@ namespace NCKH3
 
         private void openFromFile_Click(object sender, EventArgs e)
         {
+            string Location = "";
             try
             {
-#if DEBUG
-                Location = "D:/Bộ câu hỏi 1.json";
-#else
+                // Kiểm tra xem có bộ câu hỏi nào đang mở hay không
                 if (_groupquestion != null)
                 {
                     DialogResult dialogResult = MessageBox.Show("Bạn có muốn lưu bạn hiện tại không?", "Lưu", MessageBoxButtons.YesNoCancel);
@@ -363,6 +367,10 @@ namespace NCKH3
                         return;
                     }
                 }
+#if DEBUG
+                Location = "D:/Bộ câu hỏi 1.json";
+#else
+                
 
                 clearValue();
                 String Location = String.Empty;
@@ -377,8 +385,10 @@ namespace NCKH3
                 if (ret == DialogResult.OK)
                     Location = frm.FileName;
 #endif
+
                 if (Location != "")
                 {
+                    _groupquestion = new MyGroupQuestion();
                     _groupquestion.LoadFromFile(Location);
                     updateListQuestions();
                     tbAddress.Text = Location;
@@ -419,7 +429,7 @@ namespace NCKH3
             if (_current_question_id != -1)
             {
                 DialogResult dialogResult = MessageBox.Show("Lưu câu hỏi hiện tại?", "Lưu", MessageBoxButtons.YesNoCancel);
-                if(dialogResult == DialogResult.Cancel)
+                if (dialogResult == DialogResult.Cancel)
                 {
                     return;
                 }
