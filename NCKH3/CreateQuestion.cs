@@ -28,6 +28,8 @@ namespace NCKH3
 
             isNotSaved = false;
             //clearValue();
+
+            rbMultiQuestion.Hide();
         }
 
         private void btCreate_Click(object sender, EventArgs e)
@@ -520,6 +522,7 @@ namespace NCKH3
         private void rbMissingField_CheckedChanged(object sender, EventArgs e)
         {
             gbAnswer.Hide();
+           
         }
     }
 }
